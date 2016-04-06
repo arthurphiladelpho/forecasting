@@ -4,17 +4,13 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "api.openweathermap.org/data/2.5/weather?lat=35&lon=139";
-	var weatherOptions = {};
+	var weatherAPI = "api.openweathermap.org/data/2.5/weather";
+	var weatherOptions = {
+		q : "Oakland,CA",
+    	units : "metric"
+	};
 	function displayWeather(data){
-		var resultsHTML = "<ul>";
-		$.each(data, function(i, stat) {
-			resultsHTML += "<li>";
-			resultsHTML += stat.rain;
-			resultsHTML += "</li>";
-		});
-		resultsHTML += "</ul>";
-		container.innerHTML = resultsHTML;
+		$("#container").text(data.main.temp);
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
