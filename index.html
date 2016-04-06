@@ -4,9 +4,8 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "api.openweathermap.org/data/2.5/weather";
+	var weatherAPI = "api.openweathermap.org/data/2.5/weather?q=London";
 	var weatherOptions = {
-		q : "Oakland,CA",
     	units : "metric"
 	};
 	function displayWeather(data){
