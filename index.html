@@ -1,27 +1,66 @@
-<!DOCTYPE html>
-<html>
-    <body>
-    <p id="weather">Here's the weather:<p>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+	window.onload = function (){
+	
+	// CREATE CONTAINER DIV
+	var container = document.createElement("div");
+	container.id = "container";
+	
+	// CREATE BUTTONS
+	
+		// CREATE IPANEMA BUTTON
+	var ipanemaBtn = document.createElement("button");
+	ipanemaBtn.id = "ipanema";
+	var ipanemaText = document.createTextNode("IPANEMA");
+	ipanemaBtn.appendChild(ipanemaText);
+	container.appendChild(ipanemaBtn);
+		
+		// CREATE LEBLON BUTTON
+	var leblonBtn = document.createElement("button");
+	leblonBtn.id = "leblon";
+	var leblonText = document.createTextNode("LEBLON");
+	leblonBtn.appendChild(leblonText);
+	leblonBtn.style.marginLeft = "10px";
+	container.appendChild(leblonBtn);
+		
+		// CREATE COPACABANA BUTTON
+	var copacabanaBtn = document.createElement("button");
+	copacabanaBtn.id = "copacabana";
+	var copacabanaText = document.createTextNode("COPACABANA");
+	copacabanaBtn.appendChild(copacabanaText);
+	copacabanaBtn.style.marginLeft = "10px";
+	container.appendChild(copacabanaBtn);
+		
+		// ADD FUNCTIONALITY TO BUTTONS
+	$("button").click(function(){
+		// CALLBACK FUNCTION FOR THE CLICK EVENT HANDLER
+	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+	var beach = $this.text();
+	var flickrOptions = {
+		tags: place,
+		format: "json"
+		};
+	function displayPics(data){
+		var resultsHTML = "<ul>";
+		$.each(data.items, function(i, pic) {
+			resultsHTML += "<li>";
+			resultsHTML += '<a href="' + pic.link + ' " class="image">';
+			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+		});
+		resultsHTML += "</ul>";
+		$('#container').html(resultsHTML);
+	}
+	
+	$getJSON(flickrAPI, flickrOptions, displayPics);
+	
+	});
 
-    <button onclick="b()">Submit</button>
-        <script>
+		// ADD CONTAINER TO BODY
+	document.body.appendChild(container);
+		
+}
+// THE AJAX CALL USING THE GETJSON METHOD: $getJSON(url to the resource, data we want to send along with the url, callback function);
+// ?jsoncallback=? this query tells flickr that we are making a JSONP request
+</script>
 
-        function b(){
-
-            var apiKey = '<PRIVATE>';
-            var url = 'https://api.forecast.io/forecast/';
-            var lati = 0;
-            var longi = 0;
-            var data;
-
-            $.getJSON(url + apiKey + "/" + lati + "," + longi + "?callback=?", function(data) {
-              //console.log(data);
-              $('#weather').html('and the temperature is: ' + data.currently.temperature);
-            });
-        }
-        </script>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    </body>
-</html>
