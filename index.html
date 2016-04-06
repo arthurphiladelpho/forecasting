@@ -4,24 +4,20 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-	var beach = "ipanema";
-	var flickrOptions = {
-		tags: beach,
-		format: "json"
-		};
-	function displayPics(data){
+	var weatherAPI = "api.openweathermap.org/data/2.5/weather?lat=35&lon=139";
+	var weatherOptions = {};
+	function displayWeather(data){
 		var resultsHTML = "<ul>";
-		$.each(data.items, function(i, pic) {
+		$.each(data, function(i, stat) {
 			resultsHTML += "<li>";
-			resultsHTML += '<a href="' + pic.link + ' " class="image">';
-			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+			resultsHTML += stat.rain;
+			resultsHTML += "</li>";
 		});
 		resultsHTML += "</ul>";
 		container.innerHTML = resultsHTML;
 	}
 
-	$.getJSON(flickrAPI, flickrOptions, displayPics);
+	$.getJSON(weatherAPI, weatherOptions, displayWeather);
 
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
