@@ -6,7 +6,9 @@
 	// CREATE CONTAINER DIV
 	var container = document.createElement("div");
 	container.id = "container";
-	
+	// CREATE SUB CONTAINER DIV
+	var subContainer = document.createElement("div");
+	subContainer.id = "subContainer";
 	// CREATE BUTTONS
 	
 		// CREATE IPANEMA BUTTON
@@ -49,7 +51,7 @@
 			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
 		});
 		resultsHTML += "</ul>";
-		$('#container').html(resultsHTML);
+		subContainer.appendChild(resultsHTML);
 	}
 	
 	$getJSON(flickrAPI, flickrOptions, displayPics);
@@ -57,6 +59,7 @@
 	});
 
 		// ADD CONTAINER TO BODY
+	container.appendChild(subContainer);
 	document.body.appendChild(container);
 		
 }
