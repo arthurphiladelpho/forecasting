@@ -3,60 +3,20 @@
 <script>
 	window.onload = function (){
 	
-	// CREATE CONTAINER DIV
 	var container = document.createElement("div");
 	container.id = "container";
-	// CREATE SUB CONTAINER DIV
-	var subContainer = document.createElement("div");
-	subContainer.id = "subContainer";
-	// CREATE BUTTONS
-	
-		// CREATE IPANEMA BUTTON
-	var ipanemaBtn = document.createElement("button");
-	ipanemaBtn.id = "ipanema";
-	var ipanemaText = document.createTextNode("IPANEMA");
-	ipanemaBtn.appendChild(ipanemaText);
-	container.appendChild(ipanemaBtn);
-		
-		// CREATE LEBLON BUTTON
-	var leblonBtn = document.createElement("button");
-	leblonBtn.id = "leblon";
-	var leblonText = document.createTextNode("LEBLON");
-	leblonBtn.appendChild(leblonText);
-	leblonBtn.style.marginLeft = "10px";
-	container.appendChild(leblonBtn);
-		
-		// CREATE COPACABANA BUTTON
-	var copacabanaBtn = document.createElement("button");
-	copacabanaBtn.id = "copacabana";
-	var copacabanaText = document.createTextNode("COPACABANA");
-	copacabanaBtn.appendChild(copacabanaText);
-	copacabanaBtn.style.marginLeft = "10px";
-	container.appendChild(copacabanaBtn);
-		
-		// ADD FUNCTIONALITY TO BUTTONS
-	$("#ipanema").click(function(){
-		subContainer.innerHTML = "button clicked";
-		// CALLBACK FUNCTION FOR THE CLICK EVENT HANDLER
 	var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather';
 	var data = {
     	q : "Oakland,CA",
     	units : "metric"
   	};
   	function showWeather(weatherReport) {
-    $('#temperature').text(weatherReport.main.temp);
+    $('#container').text(weatherReport.main.temp);
   	}
-
  	$.getJSON(weatherAPI, data, showWeather);
-	
 	});
-
-		// ADD CONTAINER TO BODY
-	container.appendChild(subContainer);
-	document.body.appendChild(container);
-		
+	
+	document.body.appendChild(container);		
 }
-// THE AJAX CALL USING THE GETJSON METHOD: $getJSON(url to the resource, data we want to send along with the url, callback function);
-
 </script>
 
