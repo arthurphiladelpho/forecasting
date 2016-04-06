@@ -35,12 +35,12 @@
 	container.appendChild(copacabanaBtn);
 		
 		// ADD FUNCTIONALITY TO BUTTONS
-	$("button").click(function(){
+	$("#ipanema").click(function(){
 		subContainer.innerHTML = "button clicked";
 		// CALLBACK FUNCTION FOR THE CLICK EVENT HANDLER
 	var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather';
 	var data = {
-    	q : "Portland,OR",
+    	q : "Oakland,CA",
     	units : "metric"
   	};
   	function showWeather(weatherReport) {
