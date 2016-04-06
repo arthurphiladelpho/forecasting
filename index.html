@@ -2,20 +2,28 @@
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
 	window.onload = function (){
-	
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather';
-	var data = {
-    	q : "Oakland,CA",
-    	units : "metric"
-  	};
-  	function showWeather(weatherReport) {
-    $('#container').text(weatherReport.main.temp);
-  	}
- 	$.getJSON(weatherAPI, data, showWeather);
-	});
-	
+	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+	var beach = "ipanema";
+	var flickrOptions = {
+		tags: beach,
+		format: "json"
+		};
+	function displayPics(data){
+		var resultsHTML = "<ul>";
+		$.each(data.items, function(i, pic) {
+			resultsHTML += "<li>";
+			resultsHTML += '<a href="' + pic.link + ' " class="image">';
+			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+		});
+		resultsHTML += "</ul>";
+		container.appendChild(resultsHTML);	
+	}
+
+	$.getJSON(flickrAPI, flickrOptions, displayPics);
+
+		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
 }
 </script>
