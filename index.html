@@ -37,24 +37,16 @@
 		// ADD FUNCTIONALITY TO BUTTONS
 	$("button").click(function(){
 		// CALLBACK FUNCTION FOR THE CLICK EVENT HANDLER
-	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-	var beach = $this.text();
-	var flickrOptions = {
-		tags: beach,
-		format: "json"
-		};
-	function displayPics(data){
-		var resultsHTML = "<ul>";
-		$.each(data.items, function(i, pic) {
-			resultsHTML += "<li>";
-			resultsHTML += '<a href="' + pic.link + ' " class="image">';
-			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
-		});
-		resultsHTML += "</ul>";
-		subContainer.appendChild(resultsHTML);
-	}
-	
-	$getJSON(flickrAPI, flickrOptions, displayPics);
+	var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather';
+	var data = {
+    	q : "Portland,OR",
+    	units : "metric"
+  	};
+  	function showWeather(weatherReport) {
+    $('#temperature').text(weatherReport.main.temp);
+  	}
+
+ 	$.getJSON(weatherAPI, data, showWeather);
 	
 	});
 
@@ -64,6 +56,6 @@
 		
 }
 // THE AJAX CALL USING THE GETJSON METHOD: $getJSON(url to the resource, data we want to send along with the url, callback function);
-// ?jsoncallback=? this query tells flickr that we are making a JSONP request
+
 </script>
 
