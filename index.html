@@ -1,14 +1,20 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-jQuery(document).ready(function($) {
-  $.ajax({
-  url : "http://api.wunderground.com/api/Your_Key/geolookup/conditions/q/IA/Cedar_Rapids.json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-  var location = parsed_json['location']['city'];
-  var temp_f = parsed_json['current_observation']['temp_f'];
-  alert("Current temperature in " + location + " is: " + temp_f);
-  }
-  });
-});
+	window.onload = function (){
+	var container = document.createElement("div");
+	container.id = "container";
+	var weatherAPI = "api.openweathermap.org/data/2.5/weather?q=Amsterdam,NL";
+	var weatherOptions = {
+    	units : "metric"
+	};
+	function displayWeather(data){
+		$("#container").text(data.main.temp);
+	}
+
+	$.getJSON(weatherAPI, weatherOptions, displayWeather);
+		// ADD CONTAINER TO BODY
+	document.body.appendChild(container);		
+}
 </script>
+
