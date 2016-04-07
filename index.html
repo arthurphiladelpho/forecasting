@@ -9,9 +9,7 @@
 	function displayWeather(data){
 		$("#container").text(data.daily);
 	}
-
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
-
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
 }
