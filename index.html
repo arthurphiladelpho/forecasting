@@ -9,7 +9,7 @@
     	units : "metric"
 	};
 	function displayWeather(data){
-		$("#container").text(data.main.temp);
+		$("#container").text(data);
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
