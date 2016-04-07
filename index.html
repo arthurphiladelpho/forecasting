@@ -4,15 +4,14 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-	var weatherOptions = {
-    	units : "metric"
-	};
+	var weatherAPI = "https://api.forecast.io/forecast/a45bd61020ba2dacf470d8130e92240b/-22.9830,-43.2052";
+	var weatherOptions = {};
 	function displayWeather(data){
 		$("#container").text(data);
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
+
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
 }
