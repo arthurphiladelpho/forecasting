@@ -4,12 +4,10 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "api.openweathermap.org/data/2.5/weather?q=London";
-	var weatherOptions = {
-    	units : "metric"
-	};
+	var weatherAPI = "https://api.forecast.io/forecast/a45bd61020ba2dacf470d8130e92240b/-22.9830,-43.2052";
+	var weatherOptions = {};
 	function displayWeather(data){
-		$("#container").text(data.main.temp);
+		$("#container").text(data.daily);
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
