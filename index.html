@@ -18,7 +18,7 @@
 } */
 
 	$(document).ready(function(){
-		var url = "api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+		var url = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
 		$.getJSON(url, function(data){
 			alert("Weather is " + data.city.name + "!");
 			alert("Weather is " + data.list[0].weather[0].description);
