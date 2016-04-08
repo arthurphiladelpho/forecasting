@@ -1,0 +1,29 @@
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+	window.onload = function (){
+	var container = document.createElement("div");
+	container.id = "container";
+	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?q=London,uk&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+	var weatherOptions = {
+    	units : "metric"
+	};
+	function displayWeather(data){
+		$("#container").text(data.city.sun);
+	}
+
+	$.getJSON(weatherAPI, weatherOptions, displayWeather);
+		// ADD CONTAINER TO BODY
+	document.body.appendChild(container);		
+} 
+/*
+	$(document).ready(function(){
+		var url = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+		$.getJSON(url, function(data){
+			alert("Weather is " + data.city.name + "!");
+			alert("Weather is " + data.list[0].weather[0].description);
+		});
+	});
+*/
+</script>
+
