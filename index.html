@@ -4,12 +4,20 @@
 	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?q=London,uk&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+	var rioID = 3451190;
+	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=" + rioID + "&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
 	var weatherOptions = {
     	units : "metric"
 	};
 	function displayWeather(data){
-		$("#container").text(data.city.sun);
+		
+		container.innerHTML = "<h2>" + data.city.name + "</h2>";
+		container.innerHTML += "<ul>";
+		//container.innerHTML += "<li>" + data.wind.direction.code + "</l1>";
+		container.innerHTML += "<li>" + data.city.country + "</l1>";
+		container.innerHTML += "<li>" + data.temperature.value + "</l1>";
+		//container.innerHTML += "<li>" + data.city.name + "</l1>";
+		container.innerHTML += "</ul>";
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
