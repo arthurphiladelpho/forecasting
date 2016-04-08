@@ -23,24 +23,41 @@
 	}
 
 	$.getJSON(flickrAPI, flickrOptions, displayPics);
-	*/
+	
+
 	var ipanemaBtn = document.createElement("button");
 	ipanemaBtn.id = "ipanema";
 	var ipanemaText = document.createTextNode("IPANEMA");
 	ipanemaBtn.appendChild(ipanemaText);
 	container.appendChild(ipanemaBtn);
 	$("body").on('click', 'button', function(){
-		alert('asdfasdf');
+		alert($(this).text());
 	});
 
+	*/
+
+	var ipanemaBtn = document.createElement("button");
+	ipanemaBtn.id = "ipanema";
+	var ipanemaText = document.createTextNode("IPANEMA");
+	ipanemaBtn.appendChild(ipanemaText);
+	container.appendChild(ipanemaBtn);
+
+	
+		// CREATE LEBLON BUTTON
 	var leblonBtn = document.createElement("button");
 	leblonBtn.id = "leblon";
 	var leblonText = document.createTextNode("LEBLON");
 	leblonBtn.appendChild(leblonText);
+	leblonBtn.style.marginLeft = "10px";
 	container.appendChild(leblonBtn);
-	$("body").on('click', 'button', function(){
-		alert('brsrbsbrs');
-	});
+		
+		// CREATE COPACABANA BUTTON
+	var copacabanaBtn = document.createElement("button");
+	copacabanaBtn.id = "copacabana";
+	var copacabanaText = document.createTextNode("COPACABANA");
+	copacabanaBtn.appendChild(copacabanaText);
+	copacabanaBtn.style.marginLeft = "10px";
+	container.appendChild(copacabanaBtn);
 
 
 		// ADD CONTAINER TO BODY
