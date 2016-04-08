@@ -9,7 +9,7 @@
     	units : "metric"
 	};
 	function displayWeather(data){
-		$("#container").text(data.city.sun.rise);
+		$("#container").text(data.city.sun);
 	}
 
 	$.getJSON(weatherAPI, weatherOptions, displayWeather);
