@@ -1,67 +1,29 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-	$(document).ready(function(){
+	window.onload = function (){
 	var container = document.createElement("div");
 	container.id = "container";
-	/*
-	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-	var beach = "ipanema";
-	var flickrOptions = {
-		tags: beach,
-		format: "json"
-		};
-	function displayPics(data){
-		var resultsHTML = "<ul>";
-		$.each(data.items, function(i, pic) {
-			resultsHTML += "<li>";
-			resultsHTML += '<a href="' + pic.link + ' " class="image">';
-			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
-		});
-		resultsHTML += "</ul>";
-		container.innerHTML = resultsHTML;
+	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?q=London,uk&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+	var weatherOptions = {
+    	units : "metric"
+	};
+	function displayWeather(data){
+		$("#container").text(data.city.sun.rise);
 	}
 
-	$.getJSON(flickrAPI, flickrOptions, displayPics);
-	
-
-	var ipanemaBtn = document.createElement("button");
-	ipanemaBtn.id = "ipanema";
-	var ipanemaText = document.createTextNode("IPANEMA");
-	ipanemaBtn.appendChild(ipanemaText);
-	container.appendChild(ipanemaBtn);
-	$("body").on('click', 'button', function(){
-		alert($(this).text());
-	});
-
-	*/
-
-	var ipanemaBtn = document.createElement("button");
-	ipanemaBtn.id = "ipanema";
-	var ipanemaText = document.createTextNode("IPANEMA");
-	ipanemaBtn.appendChild(ipanemaText);
-	container.appendChild(ipanemaBtn);
-
-	
-		// CREATE LEBLON BUTTON
-	var leblonBtn = document.createElement("button");
-	leblonBtn.id = "leblon";
-	var leblonText = document.createTextNode("LEBLON");
-	leblonBtn.appendChild(leblonText);
-	leblonBtn.style.marginLeft = "10px";
-	container.appendChild(leblonBtn);
-		
-		// CREATE COPACABANA BUTTON
-	var copacabanaBtn = document.createElement("button");
-	copacabanaBtn.id = "copacabana";
-	var copacabanaText = document.createTextNode("COPACABANA");
-	copacabanaBtn.appendChild(copacabanaText);
-	copacabanaBtn.style.marginLeft = "10px";
-	container.appendChild(copacabanaBtn);
-
-
+	$.getJSON(weatherAPI, weatherOptions, displayWeather);
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
- });
+} 
+/*
+	$(document).ready(function(){
+		var url = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+		$.getJSON(url, function(data){
+			alert("Weather is " + data.city.name + "!");
+			alert("Weather is " + data.list[0].weather[0].description);
+		});
+	});
+*/
 </script>
 
