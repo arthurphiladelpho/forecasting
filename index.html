@@ -1,29 +1,50 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-	window.onload = function (){
+	$(document).ready(function(){
 	var container = document.createElement("div");
 	container.id = "container";
-	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-	var weatherOptions = {
-    	units : "metric"
-	};
-	function displayWeather(data){
-		$("#container").text(data);
+	/*
+	var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+	var beach = "ipanema";
+	var flickrOptions = {
+		tags: beach,
+		format: "json"
+		};
+	function displayPics(data){
+		var resultsHTML = "<ul>";
+		$.each(data.items, function(i, pic) {
+			resultsHTML += "<li>";
+			resultsHTML += '<a href="' + pic.link + ' " class="image">';
+			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+		});
+		resultsHTML += "</ul>";
+		container.innerHTML = resultsHTML;
 	}
 
-	$.getJSON(weatherAPI, weatherOptions, displayWeather);
+	$.getJSON(flickrAPI, flickrOptions, displayPics);
+	*/
+	var ipanemaBtn = document.createElement("button");
+	ipanemaBtn.id = "ipanema";
+	var ipanemaText = document.createTextNode("IPANEMA");
+	ipanemaBtn.appendChild(ipanemaText);
+	container.appendChild(ipanemaBtn);
+	$("body").on('click', 'button', function(){
+		alert('asdfasdf');
+	});
+
+	var leblonBtn = document.createElement("button");
+	leblonBtn.id = "leblon";
+	var leblonText = document.createTextNode("LEBLON");
+	leblonBtn.appendChild(leblonText);
+	container.appendChild(leblonBtn);
+	$("body").on('click', 'button', function(){
+		alert('brsrbsbrs');
+	});
+
+
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
-} 
-/*
-	$(document).ready(function(){
-		var url = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-		$.getJSON(url, function(data){
-			alert("Weather is " + data.city.name + "!");
-			alert("Weather is " + data.list[0].weather[0].description);
-		});
-	});
-*/
+ });
 </script>
 
