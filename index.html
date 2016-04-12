@@ -10,78 +10,107 @@
 	var rioText = document.createTextNode("RIO");
 	rioBtn.appendChild(rioText);
 	container.appendChild(rioBtn);
-/*
-	var leblonBtn = document.createElement("button");
-	leblonBtn.id = "leblon";
-	var leblonText = document.createTextNode("LEBLON");
-	leblonBtn.appendChild(leblonText);
-	leblonBtn.style.marginLeft = "10px";
-	container.appendChild(leblonBtn);
 
-	var copacabanaBtn = document.createElement("button");
-	copacabanaBtn.id = "copacabana";
-	var copacabanaText = document.createTextNode("COPACABANA");
-	copacabanaBtn.appendChild(copacabanaText);
-	copacabanaBtn.style.marginLeft = "10px";
-	container.appendChild(copacabanaBtn);
-*/
+	var portoBtn = document.createElement("button");
+	portoBtn.id = "porto";
+	var portoText = document.createTextNode("PORTO");
+	portoBtn.appendChild(portoText);
+	portoBtn.style.marginLeft = "10px";
+	container.appendChild(portoBtn);
+
+	var floripaBtn = document.createElement("button");
+	floripaBtn.id = "floripa";
+	var floripaText = document.createTextNode("FLORIPA");
+	floripaBtn.appendChild(floripaText);
+	floripaBtn.style.marginLeft = "10px";
+	container.appendChild(floripaBtn);
+
+	var olindaBtn = document.createElement("button");
+	olindaBtn.id = "olinda";
+	var olindaText = document.createTextNode("OLINDA");
+	olindaBtn.appendChild(olindaText);
+	olindaBtn.style.marginLeft = "10px";
+	container.appendChild(olindaBtn);
+
+	var recifeBtn = document.createElement("button");
+	recifeBtn.id = "olinda";
+	var recifeText = document.createTextNode("RECIFE");
+	recifeBtn.appendChild(recifeText);
+	recifeBtn.style.marginLeft = "10px";
+	container.appendChild(recifeBtn);
+
 	var resultsContainer = document.createElement("div");
 	resultsContainer.id = "resultsContainer";
 	container.appendChild(resultsContainer);
-	
-	$("body").on('click', 'button', function(){
-		var results = document.createElement("div");
-		results.id = $(this).text();
-		results.id += "status";
 
-		var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-		var beach = $(this).text();
-		var flickrOptions = {
-		tags: beach,
-		format: "json"
-		};
-		function displayPics(data){
-		var resultsHTML = "<ul>";
-		$.each(data.items, function(i, pic) {
-			resultsHTML += "<li>";
-			resultsHTML += '<a href="' + pic.link + ' " class="image">';
-			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+		$("body").on('click', 'button', function(){
+			resultsContainer.innerHTML = " ";
+			var weatherResults = document.createElement("div");
+			weatherResults.id = $(this).text();
+			weatherResults.id += "weatherResults";
+
+			var ID;
+			
+			if(weatherResults.id === "RIOweatherResults"){
+				ID = 3451190;
+			} else if(weatherResults.id === "FLORIPAweatherResults"){
+				ID = 3463237;
+			} else if(weatherResults.id === "PORTOweatherResults"){
+				ID = 3452925;
+			} else if(weatherResults.id === "OLINDAweatherResults"){
+				ID = 3393536;
+			} else if(weatherResults.id === "OLINDAweatherResults"){
+				ID = 3390760;
+			}
+
+
+			var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=" + ID + "&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+			
+			var weatherOptions = { units : "metric" };
+			
+			function displayWeather(data){
+			weatherResults.innerHTML = "<h2>" + data.city.name + "</h2>";
+			weatherResults.innerHTML += "<ul>";
+			weatherResults.innerHTML += "<li>" + data.city.country + "</l1>";
+			weatherResults.innerHTML += "<li>" + data.temperature.value + "</l1>";
+			weatherResults.innerHTML += "</ul>";
+			}	
+
+			$.getJSON(weatherAPI, weatherOptions, displayWeather);	
+			
+			resultsContainer.appendChild(weatherResults);
 		});
-		resultsHTML += "</ul>";
-		results.innerHTML = resultsHTML;
-	}
-		$.getJSON(flickrAPI, flickrOptions, displayPics);
-		//results.innerHTML = $(this).text();
-		resultsContainer.appendChild(results);	
-	});
+
 	
-	$("body").on('click', 'button', function(){
-		
-		var weatherResults = document.createElement("div");
-		weatherResults.id = $(this).text();
-		weatherResults.id += "weatherResults";
-		
+	
+		$("body").on('click', 'button', function(){
+			var results = document.createElement("div");
+			results.id = $(this).text();
+			results.id += "status";
 
-		var rioID = 3451190;
-		var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=" + rioID + "&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-		var weatherOptions = {
-    	units : "metric"
-		};
-		
-		function displayWeather(data){
-		weatherResults.innerHTML = "<h2>" + data.city.name + "</h2>";
-		weatherResults.innerHTML += "<ul>";
-		weatherResults.innerHTML += "<li>" + data.city.country + "</l1>";
-		weatherResults.innerHTML += "<li>" + data.temperature.value + "</l1>";
-		weatherResults.innerHTML += "</ul>";
-	}
-
-	$.getJSON(weatherAPI, weatherOptions, displayWeather);	
-	resultsContainer.appendChild(weatherResults);
+			var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+			var beach = $(this).text();
+			var flickrOptions = {
+			tags: beach,
+			format: "json"
+			};
+			function displayPics(data){
+			var resultsHTML = "<ul>";
+			$.each(data.items, function(i, pic) {
+				resultsHTML += "<li>";
+				resultsHTML += '<a href="' + pic.link + ' " class="image">';
+				resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+			});
+			resultsHTML += "</ul>";
+			results.innerHTML = resultsHTML;
+		}
+			$.getJSON(flickrAPI, flickrOptions, displayPics);
+			//results.innerHTML = $(this).text();
+			resultsContainer.appendChild(results);	
+		});
+	
+	document.body.appendChild(container);		
 	});
 
-		// ADD CONTAINER TO BODY
-	document.body.appendChild(container);		
- });
 </script>
 
