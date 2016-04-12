@@ -1,37 +1,87 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-	window.onload = function (){
+	$(document).ready(function(){
 	var container = document.createElement("div");
 	container.id = "container";
-	var rioID = 3451190;
-	var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=" + rioID + "&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-	var weatherOptions = {
-    	units : "metric"
-	};
-	function displayWeather(data){
+
+	var rioBtn = document.createElement("button");
+	rioBtn.id = "rio";
+	var rioText = document.createTextNode("RIO");
+	rioBtn.appendChild(rioText);
+	container.appendChild(rioBtn);
+/*
+	var leblonBtn = document.createElement("button");
+	leblonBtn.id = "leblon";
+	var leblonText = document.createTextNode("LEBLON");
+	leblonBtn.appendChild(leblonText);
+	leblonBtn.style.marginLeft = "10px";
+	container.appendChild(leblonBtn);
+
+	var copacabanaBtn = document.createElement("button");
+	copacabanaBtn.id = "copacabana";
+	var copacabanaText = document.createTextNode("COPACABANA");
+	copacabanaBtn.appendChild(copacabanaText);
+	copacabanaBtn.style.marginLeft = "10px";
+	container.appendChild(copacabanaBtn);
+*/
+	var resultsContainer = document.createElement("div");
+	resultsContainer.id = "resultsContainer";
+	container.appendChild(resultsContainer);
+	
+	$("body").on('click', 'button', function(){
+		var results = document.createElement("div");
+		results.id = $(this).text();
+		results.id += "status";
+
+		var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+		var beach = $(this).text();
+		var flickrOptions = {
+		tags: beach,
+		format: "json"
+		};
+		function displayPics(data){
+		var resultsHTML = "<ul>";
+		$.each(data.items, function(i, pic) {
+			resultsHTML += "<li>";
+			resultsHTML += '<a href="' + pic.link + ' " class="image">';
+			resultsHTML += '<img src="' + pic.media.m + ' "></a></li>';
+		});
+		resultsHTML += "</ul>";
+		results.innerHTML = resultsHTML;
+	}
+		$.getJSON(flickrAPI, flickrOptions, displayPics);
+		//results.innerHTML = $(this).text();
+		resultsContainer.appendChild(results);	
+	});
+	
+	$("body").on('click', 'button', function(){
 		
-		container.innerHTML = "<h2>" + data.city.name + "</h2>";
-		container.innerHTML += "<ul>";
-		//container.innerHTML += "<li>" + data.wind.direction.code + "</l1>";
-		container.innerHTML += "<li>" + data.city.country + "</l1>";
-		container.innerHTML += "<li>" + data.temperature.value + "</l1>";
-		//container.innerHTML += "<li>" + data.city.name + "</l1>";
-		container.innerHTML += "</ul>";
+		var weatherResults = document.createElement("div");
+		weatherResults.id = $(this).text();
+		weatherResults.id += "weatherResults";
+		
+
+		var rioID = 3451190;
+		var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=" + rioID + "&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
+		var weatherOptions = {
+    	units : "metric"
+		};
+		
+		function displayWeather(data){
+		weatherResults.innerHTML = "<h2>" + data.city.name + "</h2>";
+		weatherResults.innerHTML += "<ul>";
+		weatherResults.innerHTML += "<li>" + data.city.country + "</l1>";
+		weatherResults.innerHTML += "<li>" + data.temperature.value + "</l1>";
+		weatherResults.innerHTML += "</ul>";
 	}
 
-	$.getJSON(weatherAPI, weatherOptions, displayWeather);
+	$.getJSON(weatherAPI, weatherOptions, displayWeather);	
+	resultsContainer.appendChild(weatherResults);
+	});
+
 		// ADD CONTAINER TO BODY
 	document.body.appendChild(container);		
-} 
-/*
-	$(document).ready(function(){
-		var url = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117735&APPID=46d774bbb6d6ee189b2dafcf2da2ed6c";
-		$.getJSON(url, function(data){
-			alert("Weather is " + data.city.name + "!");
-			alert("Weather is " + data.list[0].weather[0].description);
-		});
-	});
-*/
+ });
 </script>
 
