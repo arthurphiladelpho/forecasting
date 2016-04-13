@@ -4,6 +4,9 @@
 	$(document).ready(function(){
 	var container = document.createElement("div");
 	container.id = "container";
+	container.style.marginLeft = "450px";
+	container.style.marginTop = "40px";
+	//container.style.marginRight = "0 auto";
 
 	var rioBtn = document.createElement("button");
 	rioBtn.id = "rio";
@@ -12,7 +15,7 @@
 	container.appendChild(rioBtn);
 
 	var itatiaiaBtn = document.createElement("button");
-	itatiaiaBtn.id = "porto";
+	itatiaiaBtn.id = "itatiaia";
 	var itatiaiaText = document.createTextNode("ITATIAIA");
 	itatiaiaBtn.appendChild(itatiaiaText);
 	itatiaiaBtn.style.marginLeft = "10px";
@@ -39,6 +42,14 @@
 	angraBtn.style.marginLeft = "10px";
 	container.appendChild(angraBtn);
 
+	var santosBtn = document.createElement("button");
+	santosBtn.id = "santos";
+	var santosText = document.createTextNode("SANTOS");
+	santosBtn.appendChild(santosText);
+	santosBtn.style.marginLeft = "10px";
+	container.appendChild(santosBtn);
+
+
 	var resultsContainer = document.createElement("div");
 	resultsContainer.id = "resultsContainer";
 	container.appendChild(resultsContainer);
@@ -61,6 +72,8 @@
 				ID = 3393536;
 			} else if(weatherResults.id === "ANGRAweatherResults"){
 				ID = 3472177;
+			} else if (weatherResults.id === "SANTOSweatherResults"){
+				ID = 3449433;
 			}
 
 
